@@ -1,5 +1,97 @@
 # Multi_LLM_Developer_Support
 
+
+Requirements for packaging and uploading a Python module to PyPI
+
+Prerequisites
+
+Latest versions of pip, setuptools, wheel.
+
+Install twine for uploading:
+
+bash
+Copy
+Edit
+python3 -m pip install --upgrade pip setuptools wheel twine
+Python Packaging
+Python Packaging
+
+Project layout & required files
+
+setup.py at the project root calling setuptools.setup(...) with your metadata.
+
+Optionally setup.cfg or pyproject.toml for declarative metadata per PEP 621.
+
+A top-level package directory (often src/<your_package>/) containing an __init__.py.
+
+README.rst or README.md, referenced via long_description/long_description_content_type.
+
+LICENSE file detailing distribution terms.
+
+MANIFEST.in if you need to include additional non-code files not auto-included.
+Python Packaging
+
+Metadata (in setup() or [project])
+
+name: unique across PyPI
+
+version: semantic version
+
+description, author, author_email
+
+license, classifiers
+
+packages or py_modules
+
+install_requires (your dependencies)
+Python Packaging
+
+Building distributions
+
+bash
+Copy
+Edit
+python3 -m pip install build
+python3 -m build  # produces .tar.gz and .whl in dist/
+Python Packaging
+
+Uploading to PyPI
+
+Create a PyPI account and generate an API token at https://pypi.org/manage/account/#api-tokens
+
+Install twine (if not already).
+
+Upload everything in dist/:
+
+bash
+Copy
+Edit
+twine upload dist/*
+(Optional) Configure ~/.pypirc with your token so you’re not prompted each time.
+Python Policies
+Python Packaging
+
+Name uniqueness
+Choose a memorable, unused name. If your desired name already exists on PyPI, pick another or, if the existing project is abandoned, request a name transfer under PEP 541. 
+Python Packaging
+Python Enhancement Proposals (PEPs)
+
+Are clones allowed?
+
+Under PyPI’s Terms of Use, by uploading you warrant that you have the right to redistribute the exact content you upload, either under its included license (e.g. MIT, BSD, Apache) or via the irrevocable license you grant when uploading 
+Python Policies
+.
+
+Cloning another project’s code and re-publishing it on PyPI is only permitted if that code’s open-source license allows redistribution and you comply fully (including carrying over license text, notices, etc.) 
+Python Enhancement Proposals (PEPs)
+.
+
+Name conflicts: PEP 541 prohibits uploading a clone under the same project name while the original maintainer remains reachable (name squatting or active-project conflict). You must use a unique name, or follow PEP 541’s process to request transfer if the original is abandoned 
+Python Enhancement Proposals (PEPs)
+.
+
+
+
 https://pypi.org/project/google-genai/
 
 https://pypi.org/project/openai/
@@ -59,4 +151,3 @@ OpenAI’s approach lowers the barrier to entry: minimal wrapper code, direct JS
 Conclusion
 Both SDKs surface powerful generative AI capabilities but cater to different developer priorities: Google’s SDK leans into structured, type-safe APIs with built-in multimedia and function-calling abstractions, while the OpenAI Python client champions flexibility, simplicity, and broad SSE-based streaming support. Choose the one that best aligns with your project’s architecture and workflow needs.
 
-https://www.npmjs.com/package/@google/genai
